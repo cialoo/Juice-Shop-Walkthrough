@@ -10,7 +10,7 @@ In this repository, I document my progress in penetration testing the OWASP Juic
 - result - failure
 - observation - the characters "<" and ">" are converted to HTML entities "&lt;" and "&gt;".
 
-**2.** An attempt to use alternatives tag: "<img>", "onerror"
+**2.** An attempt to use alternatives tag: '<img>', "onerror"
 - result - failure
 - observation - the application consistently replaces the "<" and ">".
 
