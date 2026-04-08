@@ -8,7 +8,7 @@ In this repository, I document my progress in penetration testing the OWASP Juic
 
 **1.** Injection of the tag: "<script>alert(‘XSS by cialoo’);</script>".
 - result - failure.
-- observation - the characters "<" and ">" are converted to HTML entities "&lt;" and "&gt;".
+- observation - the characters "<" and ">" are converted to HTML entities "\&lt;" and "\&gt;".
 
 **2.** An attempt to use alternatives tag: "img", "onerror".
 - result - failure.
