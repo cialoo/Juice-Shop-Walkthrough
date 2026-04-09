@@ -6,7 +6,7 @@ In this repository, I document my progress in penetration testing the OWASP Juic
 
 **Goal:** Execute a stored XSS in the "reviews" field.
 
-**1.** Injection of the tag: "<script>alert(‘XSS by cialoo’);</script>".
+**1.** Injection of the tag: "<script>alert(‘XSS’);</script>".
 - result - failure.
 - observation - the characters "<" and ">" are converted to HTML entities "\&lt;" and "\&gt;".
 
@@ -27,5 +27,19 @@ Future testing revealed that "reviews" field is processed differently during the
 The website properly sanitizies review content in the standard review display. This preventing XSS in the primary rendernig context.
 
 The "Request Data Export" functionality renders stored review content unsafely, introducing a Stored XSS vulnerability in a secondary rendering context.
+
+**Goal:** Execute a stored XSS in the "username" field.
+
+**1.** Injection "<script>alert(‘XSS’);</script>" into the field.
+- result - partial failure / Self-DoS.
+- observation - "User Profile" side uses a "blacklist" approach to security. It identifies the "<script>" tag and strips it out entirely instead of encoding it.
+
+**2.** Secondary context testing injection.
+- result - data integrity corruption.
+- observation - the data export funcionality fails to generate. The "username" field is a stored as a broken "lert('XSS');".
+
+**Conclusions**
+"Username" fields implement input filtering via blacklisting rather than output encoding. This is an insecure as it can often be bypassed by alternative payloads.
+The sanitization logic causes Self-DoS by stripping tags, the application corrupts the user's data, breaking the "User Profile" UI and the "Request Data Export" feature.
 
 ## 
