@@ -24,9 +24,7 @@ Future testing revealed that "reviews" field is processed differently during the
 - observation - stored payload embedded in a review is rendered unsafely during account data export.
 
 **Conclusions**
-The website properly sanitizies review content in the standard review display. This preventing XSS in the primary rendernig context.
-
-The "Request Data Export" functionality renders stored review content unsafely, introducing a Stored XSS vulnerability in a secondary rendering context.
+The website properly sanitizies review content in the standard review display. This preventing XSS in the primary rendernig context. The "Request Data Export" functionality renders stored review content unsafely, introducing a Stored XSS vulnerability in a secondary rendering context.
 
 ##
 
