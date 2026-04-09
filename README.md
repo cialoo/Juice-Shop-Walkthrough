@@ -2,7 +2,7 @@
 
 In this repository, I document my progress in penetration testing the OWASP Juice Shop application.
 
-##
+
 
 **Goal:** Execute a stored XSS in the "reviews" field.
 
@@ -27,6 +27,8 @@ Future testing revealed that "reviews" field is processed differently during the
 The website properly sanitizies review content in the standard review display. This preventing XSS in the primary rendernig context.
 
 The "Request Data Export" functionality renders stored review content unsafely, introducing a Stored XSS vulnerability in a secondary rendering context.
+
+##
 
 **Goal:** Execute a stored XSS in the "username" field.
 
