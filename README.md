@@ -54,3 +54,13 @@ The login page has critical security vulnerability that allows us to bypass the 
 
 ##
 
+**Goal:** Execute DOM XSS in the "search" field.
+
+**1.** Injection "<iframe src="javascript:alert('xss')">" into the field.
+- results - JavaScript execution (alert window appears).
+- observation - application implements a weak blacklist filter. While it successfully block the <script> tag, it fails to sanitize other HTML elements like <iframe>.
+
+**Conclusions**
+The "search" field is vulnerable to DOM-based XSS. The security mechanism is incomplete, allowing us to execute arbitrary code by using alternative HTML tags.
+
+##
