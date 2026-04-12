@@ -46,7 +46,7 @@ The sanitization logic causes Self-DoS by stripping tags, the application corrup
 **Goal:** Gain access to other users accounts using SQL Injection.
 
 **1.** Injection "' OR 1=1--" into the "Email" and a random string in the "Password" field.
-- resulst - logged in as the administrator.
+- result - logged in as the administrator.
 - observation - website is vulnerable to a classic SQL Injection.
 
 **Conclusions**
@@ -57,7 +57,7 @@ The login page has critical security vulnerability that allows us to bypass the 
 **Goal:** Execute DOM XSS in the "search" field.
 
 **1.** Injection "<iframe src="javascript:alert('xss')">" into the field.
-- results - JavaScript execution (alert window appears).
+- result - JavaScript execution (alert window appears).
 - observation - application implements a weak blacklist filter. While it successfully block the <script> tag, it fails to sanitize other HTML elements like <iframe>.
 
 **Conclusions**
