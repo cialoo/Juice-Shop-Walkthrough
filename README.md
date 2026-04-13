@@ -60,7 +60,26 @@ The login page has critical security vulnerability that allows us to bypass the 
 - result - JavaScript execution (alert window appears).
 - observation - application implements a weak blacklist filter. While it successfully block the <script> tag, it fails to sanitize other HTML elements like <iframe>.
 
+**2.** Impact of injection "<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/771984076&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>"
+- results - website renders a functional music player.
+- observation - the appliaction allow to use <iframe> and the same time allow for content fabrication. 
+
 **Conclusions**
 The "search" field is vulnerable to DOM-based XSS. The security mechanism is incomplete, allowing us to execute arbitrary code by using alternative HTML tags.
+
+##
+
+**Goal:** Access unauthorized customer order data (IDOR).
+
+**1.** URL manipulation  "http://localhost:3000/#/track-result?id=5267-6f0cf09311268121".
+- result - unauthorized access to the "Track Order" page.
+- observation - appliaction does not verify if the order belongs to the logged-in user. Knowing the ID is enough to view the data.
+
+**2.** Direct file access by change id for specific one:"http://localhost:3000/ftp/order_5267-6f0cf09311268121.pdf".
+- result - access to "Order Confirmation" document.
+- observation - appliaciotn give access to files without any access control checks.
+
+**Conclusions**
+The appliacation is vulnerable to IDOR (Insecure Direct Object Reference). Obtaining "Order ID" give us access to information about expected delivery, items in the order, price, quantity, bonus points earned, e-mail address and date of order. 
 
 ##
