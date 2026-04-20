@@ -49,8 +49,12 @@ The sanitization logic causes Self-DoS by stripping tags, the application corrup
 - result - logged in as the administrator.
 - observation - website is vulnerable to a classic SQL Injection.
 
+**2.** Injection "' OR 1=1 LIMIT 2,1 --" into the "Email" and a random string in the "Password" field.
+- result - logged in as another user (bender).
+- observation - query returns multiple users and LIMIT allows selecting a specific one.
+
 **Conclusions**
-The login page has critical security vulnerability that allows us to bypass the authentication mechanism. This indicates that other database-driven functionalities might also be vulnerable to SQL Injections. This potentially leading to full database exfiltration.
+The login page has critical security vulnerability that allows us to bypass the authentication mechanism. This indicates that other database-driven functionalities might also be vulnerable to SQL Injections. This could potentially lead to full database exfiltration.
 
 ##
 
