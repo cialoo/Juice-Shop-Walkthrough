@@ -54,7 +54,7 @@ The sanitization logic causes Self-DoS by stripping tags, the application corrup
 - observation - query returns multiple users and LIMIT allows selecting a specific one.
 
 ~~**Conclusions**
-The login page has critical security vulnerability that allows us to bypass the authentication mechanism. This indicates that other database-driven functionalities might also be vulnerable to SQL Injections. This could potentially lead to full database exfiltration.~~~ 
+The login page has critical security vulnerability that allows us to bypass the authentication mechanism. This indicates that other database-driven functionalities might also be vulnerable to SQL Injections. This could potentially lead to full database exfiltration.~~ 
 
 **3.** Injection "jim@juice-sh.op'--" into the "Email" and a random string in the "Password" field.
 - result - logged in as another user (jim) by type his adrress email which we allow to see in the reviews.
