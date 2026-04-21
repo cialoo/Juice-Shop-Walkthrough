@@ -53,8 +53,15 @@ The sanitization logic causes Self-DoS by stripping tags, the application corrup
 - result - logged in as another user (bender).
 - observation - query returns multiple users and LIMIT allows selecting a specific one.
 
+~~**Conclusions**
+The login page has critical security vulnerability that allows us to bypass the authentication mechanism. This indicates that other database-driven functionalities might also be vulnerable to SQL Injections. This could potentially lead to full database exfiltration.~~~ 
+
+**3.** Injection "jim@juice-sh.op'--" into the "Email" and a random string in the "Password" field.
+- result - logged in as another user (jim) by type his adrress email which we allow to see in the reviews.
+- observation - the SQL query is likely structured as: "SELECT * FROM users WHERE email='email_input' AND password='password_input'".
+
 **Conclusions**
-The login page has critical security vulnerability that allows us to bypass the authentication mechanism. This indicates that other database-driven functionalities might also be vulnerable to SQL Injections. This could potentially lead to full database exfiltration.
+The login page has critical security vulnerability that allows access to arbitrary user accounts. We can bypass the authentication mechanism by manipulating the "LIMIT" clause or we can choose users by using a valid emial address which we allow to see in the reviews. This results in full account takeover.
 
 ##
 
