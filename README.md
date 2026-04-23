@@ -105,7 +105,7 @@ The application is vulnerable to IDOR (Insecure Direct Object Reference). Obtain
 - result - successful authentication.
 - observation - the application compares the provided value directly with the stored MD5 hash.
 
-**Conclusion**
+**Conclusions**
 The application uses unsalted MD5 hashing for password storage. This allows an attacker to verify password hashes via SQL Injection and potentially recover plaintext passwords of the users. This significantly increases the impact of the SQL Injection vulnerability.
 
 ##
