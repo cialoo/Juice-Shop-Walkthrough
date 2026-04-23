@@ -91,6 +91,37 @@ The "search" field is vulnerable to DOM-based XSS. The security mechanism is inc
 - observation - appliaciotn give access to files without any access control checks.
 
 **Conclusions**
-The appliacation is vulnerable to IDOR (Insecure Direct Object Reference). Obtaining "Order ID" give us access to information about expected delivery, items in the order, price, quantity, bonus points earned, e-mail address and date of order. 
+The application is vulnerable to IDOR (Insecure Direct Object Reference). Obtaining "Order ID" give us access to information about expected delivery, items in the order, price, quantity, bonus points earned, e-mail address and date of order. 
 
 ##
+
+**Goal:** Verification of password hashing mechanism.
+
+**1.** Check password length using SQL Injection: "1@1.pl' AND LENGTH(password) = 32 --" in the username field.
+- result - successful, password length is 32 characters.
+- observation - MD5 hashes have the same length of 32 characters.
+
+**2.** Convert known password "11111" to its MD5 hash "b0baee9d279d34fa1dfd71aadb908c3f" and attempt authentication using SQL Injection: "1@1.pl' AND password = 'b0baee9d279d34fa1dfd71aadb908c3f'--" in the username field.
+- result - successful authentication.
+- observation - the application compares the provided value directly with the stored MD5 hash.
+
+**Conclusion**
+The application uses unsalted MD5 hashing for password storage. This allows an attacker to verify password hashes via SQL Injection and potentially recover plaintext passwords of the users. This significantly increases the impact of the SQL Injection vulnerability.
+
+##
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
