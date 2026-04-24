@@ -110,6 +110,21 @@ The application uses unsalted MD5 hashing for password storage. This allows an a
 
 ##
 
+**Goal.** Perform password extraction via Blind SQL Injection.
+
+**1.** Test password values for the administrator account using: "admin@juice-sh.op' AND password LIKE 'n%' --", where "n" represents each possible MD5 character (0-9, a-f).
+- result - after multiple attempts, successful login using the full 32-character pattern: "admin@juice-sh.op' AND password LIKE '0192023a7bbd73250516f069df18b500%' --".
+- observation - the login page can be use as a boolean oracle (True/False) to verify correct password characters.
+
+**2.** Decode the extracted MD5 hash "0192023a7bbd73250516f069df18b500" and attempt authentication.
+- result - decoded password is "admin123", successful login.
+- observation - user passwords can be recovered from their hashes.
+
+**Conclusions**
+The SQL Injection vulnerability in the login page allows full password extraction using blind techniques. Combined with weak password hashing (unsalted MD5), an attacker can recover plaintext passwords of users. This can lead to credential reuse attacks on other services (e.g., email accounts), significantly increasing the overall impact of the vulnerability.
+
+##
+
 
 
 
