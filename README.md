@@ -125,6 +125,17 @@ The SQL Injection vulnerability in the login page allows full password extractio
 
 ##
 
+**Goal.** Access administrative functionality.
+
+**1.** Direct navigation to the administrator page using the URL path "/administration" after authentication as an administrator user (admin@juice-sh.op).
+- result - successful access to the administrator control panel.
+- observation - this page is not exposed through the standard user interface, but is accessible via direct URL access.
+
+**Conclusions**
+The administration panel is accessible when authenticated as an administrator user. However, it is not directly exposed through the application UI, indicating that access relies on knowledge of the specific URL.
+
+##
+
 
 
 
