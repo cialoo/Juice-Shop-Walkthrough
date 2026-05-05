@@ -35,7 +35,7 @@ The website properly sanitizies review content in the standard review display. T
 
 **2.** Secondary context testing injection.
 - result - data integrity corruption.
-- observation - the data export funcionality fails to generate. The "username" field is a stored as a broken "lert('XSS');".
+- observation - the data export funcionality fails to generate. The "username" field is stored as a broken "lert('XSS');".
 
 **Conclusions**
 "Username" fields implement input filtering via blacklisting rather than output encoding. This is an insecure as it can often be bypassed by alternative payloads.
@@ -61,7 +61,7 @@ The login page has critical security vulnerability that allows us to bypass the 
 - observation - the SQL query is likely structured as: "SELECT * FROM users WHERE email='email_input' AND password='password_input'".
 
 **Conclusions**
-The login page has critical security vulnerability that allows access to arbitrary user accounts. We can bypass the authentication mechanism by manipulating the "LIMIT" clause or we can choose users by using a valid emial address which we allow to see in the reviews. This results in full account takeover.
+The login page has critical security vulnerability that allows access to arbitrary user accounts. We can bypass the authentication mechanism by manipulating the "LIMIT" clause or we can choose users by using a valid email address which we allow to see in the reviews. This results in full account takeover.
 
 ##
 
@@ -114,11 +114,16 @@ The application uses unsalted MD5 hashing for password storage. This allows an a
 
 **1.** Test password values for the administrator account using: "admin@juice-sh.op' AND password LIKE 'n%' --", where "n" represents each possible MD5 character (0-9, a-f).
 - result - after multiple attempts, successful login using the full 32-character pattern: "admin@juice-sh.op' AND password LIKE '0192023a7bbd73250516f069df18b500%' --".
-- observation - the login page can be use as a boolean oracle (True/False) to verify correct password characters.
+- observation - the login page can be used as a boolean oracle (True/False) to verify correct password characters.
 
 **2.** Decode the extracted MD5 hash "0192023a7bbd73250516f069df18b500" and attempt authentication.
 - result - decoded password is "admin123", successful login.
 - observation - user passwords can be recovered from their hashes.
+
+**3.** Automation of the extraction process.
+Since manual extraction of a 32-character hash is inefficient, I developed a custom Python automation script.
+- result - successful automated recovery of the full 32-character MD5 hash.
+- observation - using a Python script with the "requests" library allowed me to treat the login page as a "boolean oracle", automatically appending characters whenever a "200 OK" status was received. The script is available here: https://github.com/cialoo/Juice-Shop-Walkthrough/blob/main/juice_shop_password_breaker.py
 
 **Conclusions**
 The SQL Injection vulnerability in the login page allows full password extraction using blind techniques. Combined with weak password hashing (unsalted MD5), an attacker can recover plaintext passwords of users. This can lead to credential reuse attacks on other services (e.g., email accounts), significantly increasing the overall impact of the vulnerability.
