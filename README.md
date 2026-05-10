@@ -141,6 +141,17 @@ The administration panel is accessible when authenticated as an administrator us
 
 ##
 
+~~**Goal.** Discover hidden path.~~
+**Goal.** Discover hidden API endpoints.
+
+**1.** Develop a custom recursive fuzzer in Python to map the application's hidden infrastructure.
+- result - successful identified endpoints including "/metrics", "/api/hints/" and "/rest/user/whoami/".
+- observation - The application uses a "Soft 404" mechanism (redirect to the home page with a "200 OK" status for non-existent paths). To bypass this, my script validates findings by comparing the content length of the indetifying against home page size. The script is available here: https://github.com/cialoo/Juice-Shop-Walkthrough/blob/main/recursive_api_fuzzer.py
+
+**Conclusions**
+Modern SPA (Single-Page Application) applications like Juice Shop rely heavily on API endpoints rather than traditional URL paths, making manual discovery difficult. Initial attempts to find UI pages led to the discover of the underlying API structure. I change our reaserch to focus on API fuzzing, which revealed sensitive data.
+
+##
 
 
 
