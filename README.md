@@ -142,6 +142,7 @@ The administration panel is accessible when authenticated as an administrator us
 ##
 
 ~~**Goal.** Discover hidden path.~~
+
 **Goal.** Discover hidden API endpoints.
 
 **1.** Develop a custom recursive fuzzer in Python to map the application's hidden infrastructure.
