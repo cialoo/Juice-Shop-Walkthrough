@@ -8,8 +8,7 @@ wordlist = [
     'internal', 'login', 'metrics', 'monitoring', 'old', 'private', 
     'public', 'root', 'scripts', 'secrets', 'server-status', 'settings', 
     'setup', 'static', 'status', 'storage', 'temp', 'tmp', 'user', 'users', 
-    'utils', 'webapi', 'whoami', 'xml', 'hints', 'uploads', 'assets', 'public',
-    'images'
+    'utils', 'webapi', 'whoami', 'xml', 'hints', 'uploads', 'images'
 ]
 
 baseline_size = 75032
