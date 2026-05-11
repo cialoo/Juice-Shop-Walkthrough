@@ -154,6 +154,17 @@ Modern SPA (Single-Page Application) applications like Juice Shop rely heavily o
 
 ##
 
+**Goal.** Multiple Likes (Broken Anti-Automation).
+
+**1.** Like any review at least three times as the same user.
+- result - successful, managed to like a single review 10 times using one account.
+- observation - the application attempts to control likes on the server or database side (returning "403 Forbidden" on subsequent manual attempts). I wrote a script using multi-threading to send multiple requests. This exploited a Race Condition, the request were processed simultaneously, reaching the database before it could update.
+The script is available here: https://github.com/cialoo/Juice-Shop-Walkthrough/blob/main/automatic_like.py
+
+**Conclusions**
+The appliacation check that user give likes or no but have lacks proper concurrency control and rate limiting.
+
+##
 
 
 
