@@ -110,7 +110,7 @@ The application uses unsalted MD5 hashing for password storage. This allows an a
 
 ##
 
-**Goal.** Perform password extraction via Blind SQL Injection.
+**Goal:** Perform password extraction via Blind SQL Injection.
 
 **1.** Test password values for the administrator account using: "admin@juice-sh.op' AND password LIKE 'n%' --", where "n" represents each possible MD5 character (0-9, a-f).
 - result - after multiple attempts, successful login using the full 32-character pattern: "admin@juice-sh.op' AND password LIKE '0192023a7bbd73250516f069df18b500%' --".
@@ -130,7 +130,7 @@ The SQL Injection vulnerability in the login page allows full password extractio
 
 ##
 
-**Goal.** Access administrative functionality.
+**Goal:** Access administrative functionality.
 
 **1.** Direct navigation to the administrator page using the URL path "/administration" after authentication as an administrator user (admin@juice-sh.op).
 - result - successful access to the administrator control panel.
@@ -141,9 +141,9 @@ The administration panel is accessible when authenticated as an administrator us
 
 ##
 
-~~**Goal.** Discover hidden path.~~
+~~**Goal:** Discover hidden path.~~
 
-**Goal.** Discover hidden API endpoints.
+**Goal:** Discover hidden API endpoints.
 
 **1.** Develop a custom recursive fuzzer in Python to map the application's hidden infrastructure.
 - result - successful identified endpoints including "/metrics", "/api/hints/" and "/rest/user/whoami/".
@@ -154,7 +154,7 @@ Modern SPA (Single-Page Application) applications like Juice Shop rely heavily o
 
 ##
 
-**Goal.** Multiple Likes (Broken Anti-Automation).
+**Goal:** Multiple Likes (Broken Anti-Automation).
 
 **1.** Like any review at least three times as the same user.
 - result - successful, managed to like a single review 10 times using one account.
@@ -166,16 +166,13 @@ The appliacation check that user give likes or no but have lacks proper concurre
 
 ##
 
+**Goal:** Achieve service unavailability (DoS).
 
+**1.** Based on observations from previous scripts I decided to do stress test.
+- result - successful, website returned  "This site can’t be reached" and Node.js process crashed with "FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory" after running the script.
+- observation -The script used multi-threading to flood API endpoint. Node.js hit his limit and forced operation system to terminate the process. The script is available here: https://github.com/cialoo/Juice-Shop-Walkthrough/blob/main/http_flood.py
 
+**Conclusions**
+The application is vulnerable to resource exhaustion attacks. Without proper rate-limiting a single attacker can exhaust the server's RAM and CPU, leading to a total breach of Availability.
 
-
-
-
-
-
-
-
-
-
-
+##
